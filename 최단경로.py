@@ -8,6 +8,29 @@ from pathlib import Path
 # 기본 설정
 # =========================
 st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wide")
+
+import streamlit as st
+
+# ===== Streamlit 기본 UI 숨기기 (모바일 포함) =====
+HIDE_STREAMLIT_UI = """
+<style>
+/* 상단 햄버거/툴바, 데코 리본 */
+div[data-testid="stToolbar"] { display: none !important; }
+div[data-testid="stDecoration"] { display: none !important; }
+
+/* 기본 메뉴, 헤더, 푸터 */
+#MainMenu { visibility: hidden; }
+header { visibility: hidden; }
+footer { visibility: hidden; }
+
+/* 모바일 뷰어 배지/뱃지류까지 */
+a.viewerBadge_link__1S137 { display: none !important; }
+button.kbn-resetButton { display: none !important; }  /* 일부 테마에서 나타나는 배지 */
+</style>
+"""
+st.markdown(HIDE_STREAMLIT_UI, unsafe_allow_html=True)
+
+
 # 좌표가 설계된 원본 지도 기준 크기 (고정)
 BASE_W, BASE_H = 800, 600
 
