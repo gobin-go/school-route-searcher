@@ -11,26 +11,27 @@ st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wi
 
 
 
-# ===== Streamlit UI 배지/푸터/헤더 숨기기 =====
-HIDE_STREAMLIT_UI = """
+# ===== Streamlit 고정 배지/브랜딩 요소 전부 숨기기 =====
+HIDE_BRANDING = """
 <style>
-/* 상단 메뉴/헤더/푸터 */
-#MainMenu {visibility: hidden;}
-header {visibility: hidden;}
-footer {visibility: hidden;}
+/* 기본 헤더/메뉴/푸터 */
+#MainMenu {display: none !important;}
+header {visibility: hidden !important;}
+footer {visibility: hidden !important;}
 
-/* 하단 오른쪽 viewer badge(모바일/데스크톱 공통) */
-.viewerBadge_container__1QSob {display: none !important;}
-.viewerBadge_container__r5tak {display: none !important;}
-.css-14xtw13 {display: none !important;}  /* 구버전 클래스 */
+/* 하단 오른쪽 'Hosted with Streamlit' 배지(모바일/데스크톱 공통) */
+div[data-testid="stDecoration"] {display: none !important;}
+div[class*="viewerBadge_container"] {display: none !important;}
 div[data-testid="stStatusWidget"] {display: none !important;}
 
-/* 혹시 남아있을 수 있는 링크 앵커까지 차단 */
-a[href^="https://streamlit.io"] {display: none !important;}
+/* 관리/프로필/크라운(버튼/링크 대다수 케이스) */
+a[href*="streamlit.io"] {display: none !important;}
 a[href$=".streamlit.app"] {display: none !important;}
+button[title="Manage app"] {display: none !important;}
+a[data-testid="manage-app-button"] {display: none !important;}
 </style>
 """
-st.markdown(HIDE_STREAMLIT_UI, unsafe_allow_html=True)
+st.markdown(HIDE_BRANDING, unsafe_allow_html=True)
 
 # 좌표가 설계된 원본 지도 기준 크기 (고정)
 BASE_W, BASE_H = 800, 600
