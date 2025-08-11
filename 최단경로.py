@@ -7,6 +7,10 @@ from pathlib import Path
 # =========================
 # 기본 설정
 # =========================
+
+
+
+
 st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wide")
 
 
@@ -14,32 +18,35 @@ st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wi
 # ===== Streamlit 고정 배지/브랜딩 요소 전부 숨기기 =====
 HIDE_BRANDING = """
 <style>
-/* 기본 메뉴, 헤더, 푸터 제거 */
-#MainMenu {display: none !important;}
-header {display: none !important;}
-footer {display: none !important;}
+/* 메뉴/헤더/푸터 */
+#MainMenu, header, footer {display: none !important; visibility: hidden !important;}
 
-/* Streamlit 배지/브랜딩 요소 제거 */
-div[data-testid*="stDecoration"] {display: none !important;}
-div[class*="viewerBadge"] {display: none !important;}
-div[data-testid="stStatusWidget"] {display: none !important;}
+/* Streamlit Cloud 하단 배지(모바일/데스크톱) */
+div[data-testid*="stDecoration"], 
+div[class*="viewerBadge"], 
+div[data-testid="stStatusWidget"],
+iframe[src*="streamlit.io"],
+iframe[src*="streamlit.app"],
+a[href*="streamlit.io"],
+a[href*="streamlit.app"],
+button[title*="Streamlit"],
+button[title*="Manage"],
+svg[data-testid="iconCrownsFilled"],
+svg[data-testid="iconProfileCircle"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
 
-/* a태그 중 Streamlit 관련 링크 제거 */
-a[href*="streamlit.io"] {display: none !important;}
-a[href*="streamlit.app"] {display: none !important;}
-
-/* iframe에 포함된 경우도 숨기기 */
-iframe[src*="streamlit.io"] {display: none !important;}
-iframe[src*="streamlit.app"] {display: none !important;}
-
-/* 버튼/아이콘(왕관, 프로필 등) 제거 */
-button[title*="Streamlit"] {display: none !important;}
-button[title*="Manage"] {display: none !important;}
-svg[data-testid="iconCrownsFilled"] {display: none !important;}
-svg[data-testid="iconProfileCircle"] {display: none !important;}
+/* iframe 내부 요소까지 제거 (배지/왕관/프로필) */
+iframe {
+    display: none !important;
+    visibility: hidden !important;
+}
 </style>
 """
 st.markdown(HIDE_BRANDING, unsafe_allow_html=True)
+
 
 # 좌표가 설계된 원본 지도 기준 크기 (고정)
 BASE_W, BASE_H = 800, 600
