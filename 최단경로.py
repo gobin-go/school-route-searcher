@@ -8,9 +8,6 @@ from pathlib import Path
 # 기본 설정
 # =========================
 
-
-
-
 st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wide")
 
 
