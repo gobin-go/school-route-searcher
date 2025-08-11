@@ -11,24 +11,15 @@ st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wi
 
 import streamlit as st
 
-# ===== Streamlit 기본 UI 숨기기 (모바일 포함) =====
-HIDE_STREAMLIT_UI = """
-<style>
-/* 상단 햄버거/툴바, 데코 리본 */
-div[data-testid="stToolbar"] { display: none !important; }
-div[data-testid="stDecoration"] { display: none !important; }
-
-/* 기본 메뉴, 헤더, 푸터 */
-#MainMenu { visibility: hidden; }
-header { visibility: hidden; }
-footer { visibility: hidden; }
-
-/* 모바일 뷰어 배지/뱃지류까지 */
-a.viewerBadge_link__1S137 { display: none !important; }
-button.kbn-resetButton { display: none !important; }  /* 일부 테마에서 나타나는 배지 */
-</style>
+# ----- Streamlit 푸터 제거 -----
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;} /* 햄버거 메뉴 숨기기 */
+    footer {visibility: hidden;} /* 하단 푸터 숨기기 */
+    header {visibility: hidden;} /* 상단 헤더 숨기기 */
+    </style>
 """
-st.markdown(HIDE_STREAMLIT_UI, unsafe_allow_html=True)
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
 # 좌표가 설계된 원본 지도 기준 크기 (고정)
