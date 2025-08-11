@@ -9,18 +9,28 @@ from pathlib import Path
 # =========================
 st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wide")
 
-import streamlit as st
 
-# ----- Streamlit 푸터 제거 -----
-hide_streamlit_style = """
-    <style>
-    #MainMenu {visibility: hidden;} /* 햄버거 메뉴 숨기기 */
-    footer {visibility: hidden;} /* 하단 푸터 숨기기 */
-    header {visibility: hidden;} /* 상단 헤더 숨기기 */
-    </style>
+
+# ===== Streamlit UI 배지/푸터/헤더 숨기기 =====
+HIDE_STREAMLIT_UI = """
+<style>
+/* 상단 메뉴/헤더/푸터 */
+#MainMenu {visibility: hidden;}
+header {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* 하단 오른쪽 viewer badge(모바일/데스크톱 공통) */
+.viewerBadge_container__1QSob {display: none !important;}
+.viewerBadge_container__r5tak {display: none !important;}
+.css-14xtw13 {display: none !important;}  /* 구버전 클래스 */
+div[data-testid="stStatusWidget"] {display: none !important;}
+
+/* 혹시 남아있을 수 있는 링크 앵커까지 차단 */
+a[href^="https://streamlit.io"] {display: none !important;}
+a[href$=".streamlit.app"] {display: none !important;}
+</style>
 """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
+st.markdown(HIDE_STREAMLIT_UI, unsafe_allow_html=True)
 
 # 좌표가 설계된 원본 지도 기준 크기 (고정)
 BASE_W, BASE_H = 800, 600
