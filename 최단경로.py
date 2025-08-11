@@ -1,6 +1,7 @@
 import io
 import networkx as nx
 from PIL import Image, ImageDraw, ImageFont
+import streamlit.components.v1 as components
 import streamlit as st
 from pathlib import Path
 
@@ -9,6 +10,44 @@ from pathlib import Path
 # =========================
 
 st.set_page_config(page_title="복도 최단 경로 시뮬레이터", layout="wide")
+
+
+# 배지/브랜딩 DOM이 동적으로 생겨도 즉시 제거
+components.html("""
+<script>
+(function() {
+  function kill() {
+    const sels = [
+      'div[class*="viewerBadge"]',
+      'div[data-testid*="stDecoration"]',
+      'div[data-testid="stStatusWidget"]',
+      'a[href*="streamlit.io"]',
+      'a[href*=".streamlit.app"]',
+      'button[title*="Streamlit"]',
+      'button[title*="Manage"]',
+      'svg[data-testid="iconCrownsFilled"]',
+      'svg[data-testid="iconProfileCircle"]'
+    ];
+    sels.forEach(s => document.querySelectorAll(s).forEach(el => el.remove()));
+
+    // 하단 고정(우하단) 플로팅 배지/버튼류도 제거
+    document.querySelectorAll('div, a, button').forEach(el => {
+      const cs = getComputedStyle(el);
+      if (cs.position === 'fixed' && cs.bottom !== 'auto' && cs.right !== 'auto') {
+        // 스트림릿/클라우드 관련 텍스트나 링크가 있으면 제거
+        const txt = (el.innerText || '').toLowerCase();
+        const href = (el.getAttribute('href') || '').toLowerCase();
+        if (txt.includes('streamlit') || href.includes('streamlit')) el.remove();
+      }
+    });
+  }
+  const obs = new MutationObserver(kill);
+  obs.observe(document.body, { childList: true, subtree: true });
+  kill();
+})();
+</script>
+""", height=0)
+
 
 
 
